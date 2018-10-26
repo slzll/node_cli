@@ -1,0 +1,23 @@
+{
+  "name": "node_cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "zll": "./bin/zll"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.3.2",
+    "corser": "^2.0.1",
+    "ecstatic": "^3.3.0",
+    "http-proxy": "^1.17.0",
+    "shelljs": "^0.8.2",
+    "union": "^0.4.6",
+    "yargs": "^12.0.2"
+  }
+}

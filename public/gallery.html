@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .demo {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(60deg, #5B5893, #2c2a49);
+    }
+
+    .demo__gallery {
+      width: 688px;
+      padding: 2px;
+      flex-shrink: 0;
+      background: #eee;
+      -webkit-perspective: 700px;
+      perspective: 700px;
+      border-radius: 5px;
+    }
+
+    .demo__part {
+      position: relative;
+      float: left;
+      width: 110px;
+      height: 110px;
+      margin: 2px;
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .demo__part:hover .demo__part-front {
+      box-shadow: 0 0 10px black;
+      -webkit-transform: scale(0.96);
+      transform: scale(0.96);
+    }
+
+    .demo__part:hover .demo__part-front:after {
+      opacity: 0;
+    }
+
+    .demo__part-front,
+    .demo__part-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .demo__part-front {
+      background-color: lightslategrey;
+      background-size: cover;
+      background-position: center;
+      -webkit-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      transition: all 0.2s ease;
+    }
+
+    .demo__part-front:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      content: "";
+      opacity: 0.5;
+      transition: all 0.2s ease;
+    }
+
+    .demo__part-back {
+      -webkit-transform: rotateY(180deg) rotateX(0deg);
+      transform: rotateY(180deg) rotateX(0deg);
+    }
+
+    .demo__part-back-inner {
+      width: 680px;
+      height: 452px;
+      background-image: url('http://kirillkiyutin.com/img/nyc/nyc1.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .demo__help {
+      margin-bottom: 7px;
+      font-size: 30px;
+      font-family: "Yanone Kaffeesatz", sans-serif;
+      color: white;
+    }
+
+    .demo__help a {
+      color: white;
+    }
+
+    .demo__help a:hover {
+      color: #E39999;
+    }
+
+    .demo__part-1-1 .demo__part-back-inner {
+      -webkit-transform: translate(0px, 0px);
+      transform: translate(0px, 0px);
+    }
+
+    .demo__part-1-2 .demo__part-back-inner {
+      -webkit-transform: translate(-114px, 0px);
+      transform: translate(-114px, 0px);
+    }
+
+    .demo__part-1-3 .demo__part-back-inner {
+      -webkit-transform: translate(-228px, 0px);
+      transform: translate(-228px, 0px);
+    }
+
+    .demo__part-1-4 .demo__part-back-inner {
+      -webkit-transform: translate(-342px, 0px);
+      transform: translate(-342px, 0px);
+    }
+
+    .demo__part-1-5 .demo__part-back-inner {
+      -webkit-transform: translate(-456px, 0px);
+      transform: translate(-456px, 0px);
+    }
+
+    .demo__part-1-6 .demo__part-back-inner {
+      -webkit-transform: translate(-570px, 0px);
+      transform: translate(-570px, 0px);
+    }
+
+    .demo__part-2-1 .demo__part-back-inner {
+      -webkit-transform: translate(0px, -114px);
+      transform: translate(0px, -114px);
+    }
+
+    .demo__part-2-2 .demo__part-back-inner {
+      -webkit-transform: translate(-114px, -114px);
+      transform: translate(-114px, -114px);
+    }
+
+    .demo__part-2-3 .demo__part-back-inner {
+      -webkit-transform: translate(-228px, -114px);
+      transform: translate(-228px, -114px);
+    }
+
+    .demo__part-2-4 .demo__part-back-inner {
+      -webkit-transform: translate(-342px, -114px);
+      transform: translate(-342px, -114px);
+    }
+
+    .demo__part-2-5 .demo__part-back-inner {
+      -webkit-transform: translate(-456px, -114px);
+      transform: translate(-456px, -114px);
+    }
+
+    .demo__part-2-6 .demo__part-back-inner {
+      -webkit-transform: translate(-570px, -114px);
+      transform: translate(-570px, -114px);
+    }
+
+    .demo__part-3-1 .demo__part-back-inner {
+      -webkit-transform: translate(0px, -228px);
+      transform: translate(0px, -228px);
+    }
+
+    .demo__part-3-2 .demo__part-back-inner {
+      -webkit-transform: translate(-114px, -228px);
+      transform: translate(-114px, -228px);
+    }
+
+    .demo__part-3-3 .demo__part-back-inner {
+      -webkit-transform: translate(-228px, -228px);
+      transform: translate(-228px, -228px);
+    }
+
+    .demo__part-3-4 .demo__part-back-inner {
+      -webkit-transform: translate(-342px, -228px);
+      transform: translate(-342px, -228px);
+    }
+
+    .demo__part-3-5 .demo__part-back-inner {
+      -webkit-transform: translate(-456px, -228px);
+      transform: translate(-456px, -228px);
+    }
+
+    .demo__part-3-6 .demo__part-back-inner {
+      -webkit-transform: translate(-570px, -228px);
+      transform: translate(-570px, -228px);
+    }
+
+    .demo__part-4-1 .demo__part-back-inner {
+      -webkit-transform: translate(0px, -342px);
+      transform: translate(0px, -342px);
+    }
+
+    .demo__part-4-2 .demo__part-back-inner {
+      -webkit-transform: translate(-114px, -342px);
+      transform: translate(-114px, -342px);
+    }
+
+    .demo__part-4-3 .demo__part-back-inner {
+      -webkit-transform: translate(-228px, -342px);
+      transform: translate(-228px, -342px);
+    }
+
+    .demo__part-4-4 .demo__part-back-inner {
+      -webkit-transform: translate(-342px, -342px);
+      transform: translate(-342px, -342px);
+    }
+
+    .demo__part-4-5 .demo__part-back-inner {
+      -webkit-transform: translate(-456px, -342px);
+      transform: translate(-456px, -342px);
+    }
+
+    .demo__part-4-6 .demo__part-back-inner {
+      -webkit-transform: translate(-570px, -342px);
+      transform: translate(-570px, -342px);
+    }
+
+    .show-front {
+      -webkit-transform: none;
+      transform: none;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+
+<body>
+  <div class="demo">
+    <div class="demo__help">
+      Choose a photo
+    </div>
+    <div class="demo__gallery">
+    </div>
+  </div>
+  <script>
+    "use strict";
+    $(document).ready(function () {
+
+      var rows = 4; //change this also in css
+      var cols = 6; //change this also in css
+      var staggerTime = 150;
+
+      var urls = [
+        "https://kiyutink.github.io/nyc/nyc1.jpg",
+        "https://kiyutink.github.io/nyc/nyc2.jpg",
+        "https://kiyutink.github.io/nyc/nyc3.jpg",
+        "https://kiyutink.github.io/nyc/nyc4.jpg",
+        "https://kiyutink.github.io/nyc/nyc5.jpg",
+        "https://kiyutink.github.io/london/london1.jpg",
+        "https://kiyutink.github.io/london/london2.jpg",
+        "https://kiyutink.github.io/london/london3.jpg",
+        "https://kiyutink.github.io/madrid/madrid1.jpg",
+        "https://kiyutink.github.io/madrid/madrid2.jpg",
+        "https://kiyutink.github.io/madrid/madrid3.jpg",
+        "https://kiyutink.github.io/beijing/beijing1.jpg",
+        "https://kiyutink.github.io/beijing/beijing2.jpg",
+        "https://kiyutink.github.io/beijing/beijing3.jpg",
+        "https://kiyutink.github.io/moscow/moscow1.jpg",
+        "https://kiyutink.github.io/moscow/moscow2.jpg",
+        "https://kiyutink.github.io/moscow/moscow3.jpg",
+        "https://kiyutink.github.io/sidney/sidney1.jpg",
+        "https://kiyutink.github.io/sidney/sidney2.jpg",
+        "https://kiyutink.github.io/sidney/sidney3.jpg",
+        "https://kiyutink.github.io/tokyo/tokyo1.jpg",
+        "https://kiyutink.github.io/tokyo/tokyo2.jpg",
+        "https://kiyutink.github.io/tokyo/tokyo3.jpg",
+        "https://kiyutink.github.io/la/la3.jpg"
+      ];
+
+      var $gallery = $(".demo__gallery");
+      var $help = $(".demo__help");
+      var partsArray = [];
+      var reqAnimFr = (function () {
+        return window.requestAnimationFrame || function (cb) {
+          setTimeout(cb, 1000 / 60);
+        }
+      })();
+
+      for (let row = 1; row <= rows; row++) {
+        partsArray[row - 1] = [];
+        for (let col = 1; col <= cols; col++) {
+          $gallery.append(`<div class="show-front demo__part demo__part-${row}-${col}" row="${row}" col="${col}"><div class="demo__part-back"><div class="demo__part-back-inner"></div></div><div class="demo__part-front"></div></div>`);
+          partsArray[row - 1][col - 1] = new Part();
+        }
+      }
+
+      var $parts = $(".demo__part");
+      var $image = $(".demo__part-back-inner");
+      var help = true;
+
+      for (let i = 0; i < $parts.length; i++) {
+        $parts.find(".demo__part-front").eq(i).css("background-image", `url(${urls[i]})`);
+      }
+
+      $gallery.on("click", ".demo__part-front", function () {
+
+        $image.css("background-image", $(this).css("background-image"));
+        if (help) {
+          $help.html("Click any of the tiles to get back");
+          help = false;
+        }
+
+        let row = +$(this).closest(".demo__part").attr("row");
+        let col = +$(this).closest(".demo__part").attr("col");
+        waveChange(row, col);
+      });
+
+      $gallery.on("click", ".demo__part-back", function () {
+        if (!isShowingBack()) return;
+
+        setTimeout(function () {
+          for (let row = 1; row <= rows; row++) {
+            for (let col = 1; col <= cols; col++) {
+              partsArray[row - 1][col - 1].showing = "front";
+            }
+          }
+        }, staggerTime + $parts.length * staggerTime / 10);
+
+
+        showFront(0, $parts.length);
+
+      });
+
+      function showFront(i, maxI) {
+        if (i >= maxI) return;
+        $parts.eq(i).addClass("show-front");
+
+        reqAnimFr(function () {
+          showFront(i + 1);
+        });
+      }
+
+      function isShowingBack() {
+        return partsArray[0][0].showing == "back" && partsArray[0][cols - 1].showing == "back" && partsArray[rows - 1][0].showing == "back" && partsArray[rows - 1][cols - 1].showing == "back";
+      }
+
+      function Part() {
+        this.showing = "front";
+      }
+
+      function waveChange(rowN, colN) {
+        if (rowN > rows || colN > cols || rowN <= 0 || colN <= 0) return;
+        if (partsArray[rowN - 1][colN - 1].showing == "back") return;
+        $(".demo__part-" + rowN + "-" + colN).removeClass("show-front");
+        partsArray[rowN - 1][colN - 1].showing = "back";
+        setTimeout(function () {
+          waveChange(rowN + 1, colN);
+          waveChange(rowN - 1, colN);
+          waveChange(rowN, colN + 1);
+          waveChange(rowN, colN - 1);
+        }, staggerTime);
+      }
+    });
+  </script>
+</body>
+
+</html>
